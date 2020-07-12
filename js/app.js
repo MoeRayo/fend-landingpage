@@ -87,12 +87,13 @@ document.addEventListener('DOMContentLoaded', function (){
     
             }
         });
-    });
+});
     
 //Active navigation on scroll
+let addition = 150;
+
 window.addEventListener('scroll', event => {
   let navigationLinks = document.querySelectorAll('.menu__link');
-  let addition = 150;
   let fromTop = window.scrollY + addition;
 
   navigationLinks.forEach(link => {
@@ -110,5 +111,21 @@ window.addEventListener('scroll', event => {
     }
   });
 });
+let topo = document.querySelector('#top');
 
-// 
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+    topo.style.display = 'block';
+  } else {
+    topo.style.display ='none';
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+topo.addEventListener('click', function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  })

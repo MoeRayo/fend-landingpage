@@ -17,34 +17,18 @@
  * Define Global Variables
  * 
 */
-// let navArray = ['sectionOne', 'sectionTwo', 'sectionThree', 'sectionFour'];
 let navContainer = document.querySelector('#navbar__list');
 const navItem = document.createElement('li');
-
+let docSection = Array.from(document.querySelectorAll('section'));
+let sectionHead = Array.from(document.querySelectorAll('h2')); 
+let addition = 150;
+let gotoTop = document.querySelector('#top');
 /**
  * End Global Variables
- * Start Helper Functions
- * 
-*/
-document.addEventListener('DOMContentLoaded', function navi(evt){
-    // console.log('A paragraph was clicked: ' + evt.target.textContent);
-
-});
-
-
-
-// myCustomDiv.addEventListener('click', respondToTheClick);
- 
-
-
-/**
- * End Helper Functions
  * Begin Main Functions
  * 
 */
-let docSection = Array.from(document.querySelectorAll('section'));
-
-let sectionHead = Array.from(document.querySelectorAll('h2')); 
+// dynamically build the navigation based on the amount of section
 for (let i = 0; i < docSection.length; i++){
     for (let i = 0; i < sectionHead.length; i++){
     }
@@ -57,42 +41,9 @@ for (let i = 0; i < docSection.length; i++){
 }
 navContainer.appendChild(navItem)
 
-// build the nav
 // Add class 'active' to section when near top of viewport
 
-// simple function to use for callback in the intersection observer
-
-// Scroll to anchor ID using scrollTO event
-
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
-
-document.addEventListener('DOMContentLoaded', function (){
-        let navDisplay = document.querySelector('.navbar__menu');
-        navDisplay.style.display = 'none';
-        window.addEventListener('scroll', function(){
-            if(window.pageYOffset>0){
-                navDisplay.style.display = 'block';
-            } else {
-                navDisplay.style.display = 'none';
-    
-            }
-        });
-});
-    
-//Active navigation on scroll
-let addition = 150;
-
-window.addEventListener('scroll', event => {
+window.addEventListener('scroll', () => {
   let navigationLinks = document.querySelectorAll('.menu__link');
   let fromTop = window.scrollY + addition;
 
@@ -111,21 +62,38 @@ window.addEventListener('scroll', event => {
     }
   });
 });
-let topo = document.querySelector('#top');
 
-// When the user scrolls down 20px from the top of the document, show the button
-window.onscroll = function() {scrollFunction()};
+/**
+ * End Main Functions
+ * Begin Events
+ * 
+*/
+// this shows the navbar based on the scroll position
+document.addEventListener('DOMContentLoaded', function (){
+  let navDisplay = document.querySelector('.navbar__menu');
+  navDisplay.style.display = 'none';
+  window.addEventListener('scroll', function(){
+      if(window.pageYOffset>0){
+          navDisplay.style.display = 'block';
+      } else {
+          navDisplay.style.display = 'none';
 
-function scrollFunction() {
+      }
+  });
+});
+
+// A goto top button is shown When the user scrolls 800px from the top of the page
+window.onscroll = () => scrollFunction();
+scrollFunction = () => {
   if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-    topo.style.display = 'block';
+    gotoTop.style.display = 'block';
   } else {
-    topo.style.display ='none';
+    gotoTop.style.display ='none';
   }
+};
+// The user goes to the top of the page when the button is clicked
+topFunction = () => {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
 }
-
-// When the user clicks on the button, scroll to the top of the document
-topo.addEventListener('click', function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  })
+gotoTop.addEventListener('click', topFunction);
